@@ -25,7 +25,7 @@ const getUserWithEmail = function (email) {
   WHERE users.email = $1;
   `,[email])
   .then(res => {
-    console.log(res);
+    //console.log(res);
     // Access the name property of the first row
     // ? to prevent potential errors
     return res.rows[0];
@@ -55,7 +55,7 @@ const getUserWithId = function (id) {
   WHERE users.id = $1;
   `,[id])
   .then(res => {
-    console.log(res);
+    //console.log(res);
     // Access the name property of the first row
     // ? to prevent potential errors
     return res.rows[0];
@@ -75,7 +75,7 @@ const addUser = function (user) {
   VALUES($1, $2, $3) RETURNING *;
   `,[user.name, user.email, user.password])
   .then(res => {
-    console.log(res);
+    //console.log(res);
     // Access the name property of the first row
     // ? to prevent potential errors
     return user;
@@ -94,8 +94,23 @@ const addUser = function (user) {
  * @param {string} guest_id The id of the user.
  * @return {Promise<[{}]>} A promise to the reservations.
  */
-const getAllReservations = function (guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+const getAllReservations = function (guest_id) {
+  return pool
+  .query(`
+  SELECT properties.*,
+  AVG(rating) as average_rating
+  FROM reservations
+  JOIN properties ON reservations.property_id=properties.id
+  JOIN property_reviews ON properties.id=property_reviews.property_id
+  WHERE reservations.guest_id=$1
+  GROUP BY reservations.id,properties.id
+  ORDER BY start_date
+  LIMIT 10;
+`,[guest_id])
+.then(res => {
+  return res.rows;
+})
+.catch(err => console.error(err.message));
 };
 
 /// Properties
