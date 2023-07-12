@@ -25,20 +25,9 @@ const getUserWithEmail = function (email) {
   WHERE users.email = $1;
   `,[email])
   .then(res => {
-    //console.log(res);
-    // Access the name property of the first row
-    // ? to prevent potential errors
     return res.rows[0];
   })
   .catch(err => console.error(err.message));
-  // let resolvedUser = null;
-  // for (const userId in users) {
-  //   const user = users[userId];
-  //   if (user?.email.toLowerCase() === email?.toLowerCase()) {
-  //     resolvedUser = user;
-  //   }
-  // }
-  // return Promise.resolve(resolvedUser);
 };
 
 /**
@@ -55,9 +44,6 @@ const getUserWithId = function (id) {
   WHERE users.id = $1;
   `,[id])
   .then(res => {
-    //console.log(res);
-    // Access the name property of the first row
-    // ? to prevent potential errors
     return res.rows[0];
   })
   .catch(err => console.error(err.message));
@@ -75,16 +61,9 @@ const addUser = function (user) {
   VALUES($1, $2, $3) RETURNING *;
   `,[user.name, user.email, user.password])
   .then(res => {
-    //console.log(res);
-    // Access the name property of the first row
-    // ? to prevent potential errors
     return user;
   })
   .catch(err => console.error(err.message));
-  // const userId = Object.keys(users).length + 1;
-  // user.id = userId;
-  // users[userId] = user;
-  // return Promise.resolve(user);
 };
 
 /// Reservations
@@ -122,18 +101,41 @@ const getAllReservations = function (guest_id) {
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 const getAllProperties = function (options, limit = 10) {
-  return pool
-  .query(`
-  SELECT *
+  // 1
+  const queryParams = [];
+  // 2
+  let queryString = `
+  SELECT properties.*, avg(property_reviews.rating) as average_rating
   FROM properties
-  LIMIT $1;
-  `,[limit])
-  .then(res => {
-    return res.rows;
-  })
-  .catch(err => console.error(err.message));
-};
+  JOIN property_reviews ON properties.id = property_id
+  `;
 
+  // 3
+  if (options.city) {
+    queryParams.push(`%${options.city}%`);
+    queryString += `WHERE city LIKE $${queryParams.length} `;
+  }
+
+  
+if (options.owner_id) {
+  queryParams.push(options.owner_id);
+  queryString += `&& properties.owner_id = $${queryParams.length}`;
+}
+
+  // 4
+  queryParams.push(limit);
+  queryString += `
+  GROUP BY properties.id
+  ORDER BY cost_per_night
+  LIMIT $${queryParams.length};
+  `;
+
+  // 5
+  console.log(queryString, queryParams);
+
+  // 6
+  return pool.query(queryString, queryParams).then((res) => res.rows);
+};
 /**
  * Add a property to the database
  * @param {{}} property An object containing all of the property details.
@@ -154,3 +156,4 @@ module.exports = {
   getAllProperties,
   addProperty,
 };
+
