@@ -122,10 +122,26 @@ if (options.owner_id) {
   queryString += `&& properties.owner_id = $${queryParams.length}`;
 }
 
+if (options.min_price_per_night) {
+  queryParams.push(options.min_price_per_night);
+  queryString += `&& properties.cost_per_night > $${queryParams.length}`;
+}
+
+if (options.max_price_per_night) {
+  queryParams.push(options.max_price_per_night);
+  queryString += `&& properties.cost_per_night > $${queryParams.length}`;
+}
+
+queryString += `GROUP BY properties.id`;
+
+if (options.minimum_rating) {
+  queryParams.push(options.minimum_rating);
+  queryString += ` HAVING avg(property_reviews.rating) > $${queryParams.length}`;
+}
+
   // 4
   queryParams.push(limit);
   queryString += `
-  GROUP BY properties.id
   ORDER BY cost_per_night
   LIMIT $${queryParams.length};
   `;
