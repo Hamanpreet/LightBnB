@@ -1,45 +1,32 @@
-# LightBnB
+# LightBnB: ✨ Your Gateway to Unforgettable Vacations ✈️
+Welcome to LightBnB, the groundbreaking app set to revolutionize the travel industry. Prepare to embark on an extraordinary journey where homeowners become hosts, travelers become adventurers, and vacations become unforgettable experiences.
+
+## Discover the Power of LightBnB 🌟
+- Homeowner Registration: Homeowners can sign up and create an account to list their properties on LightBnB. They can provide details about their homes, upload photos, and set availability for renting.
+
+- Traveler Search: Travelers can search for available properties based on their desired location, travel dates, price & ratings. LightBnB will provide a list of suitable options with detailed property information and photos.
+
+- Booking and Reservations: Travelers can make bookings and reservations directly through the LightBnB platform.
+
+
+## Embark on Your LightBnB Adventure Today 🚀
+Dependencies:
+
+- bcrypt 🔒: Safeguarding your data with advanced password hashing techniques.
+- cookie-session 🍪: Secure session management with encrypted cookies.
+- express 🚀: The powerhouse web application framework that powers LightBnB.
+- nodemon 🔄: Fueling your development process with automatic server restarts, keeping you in the flow.
+
+## Getting Started
+1. Clone the repository.
+2. `npm install` to install the required dependencies.
+3. Set up the database:
+* Create a PostgreSQL database.
+* Configure the database connection in the project's configuration files.
+4. `npm run local` to start the server.
+5. Open your web browser and access LightBnB at `http://localhost:3000`
 
 ## Project Structure
-
-```
-.
-├── db
-│   ├── json
-│   └── database.js
-├── public
-│   ├── javascript
-│   │   ├── components 
-│   │   │   ├── header.js
-│   │   │   ├── login_form.js
-│   │   │   ├── new_property_form.js
-│   │   │   ├── property_listing.js
-│   │   │   ├── property_listings.js
-│   │   │   ├── search_form.js
-│   │   │   └── signup_form.js
-│   │   ├── libraries
-│   │   ├── index.js
-│   │   ├── network.js
-│   │   └── views_manager.js
-│   ├── styles
-│   │   ├── main.css
-│   │   └── main.css.map
-│   └── index.html
-├── routes
-│   ├── apiRoutes.js
-│   └── userRoutes.js
-├── styles  
-│   ├── _forms.scss
-│   ├── _header.scss
-│   ├── _property-listings.scss
-│   └── main.scss
-├── .gitignore
-├── package-lock.json
-├── package.json
-├── README.md
-└── server.js
-```
-
 * `db` contains all the database interaction code.
   * `json` is a directory that contains a bunch of dummy data in `.json` files.
   * `database.js` is responsible for all queries to the database. It doesn't currently connect to any database, all it does is return data from `.json` files.
@@ -53,3 +40,9 @@
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+
+## Join the LightBnB Community 🤝
+We value your feedback! If you encounter any issues or have suggestions for improvement, please open an issue on the project repository.
+
+For additional support or inquiries, please contact our team at haman42626@gmail.com.
+
