@@ -1,16 +1,6 @@
 const properties = require("./json/properties.json");
 const users = require("./json/users.json");
-
-/// Users
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: 'labber',
-  password: '123',
-  host: 'localhost',
-  database: 'lightbnb'
-});
-
+const pool = require('./index.js');
 
 /**
 * Get a single user from the database given their email.
@@ -119,17 +109,17 @@ const getAllProperties = function (options, limit = 10) {
   
 if (options.owner_id) {
   queryParams.push(options.owner_id);
-  queryString += `&& properties.owner_id = $${queryParams.length}`;
+  queryString += `AND properties.owner_id = $${queryParams.length}`;
 }
 
 if (options.min_price_per_night) {
   queryParams.push(options.min_price_per_night);
-  queryString += `&& properties.cost_per_night > $${queryParams.length}`;
+  queryString += `AND properties.cost_per_night > $${queryParams.length}`;
 }
 
 if (options.max_price_per_night) {
   queryParams.push(options.max_price_per_night);
-  queryString += `&& properties.cost_per_night > $${queryParams.length}`;
+  queryString += `AND properties.cost_per_night > $${queryParams.length}`;
 }
 
 queryString += `GROUP BY properties.id`;
