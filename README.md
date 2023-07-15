@@ -17,6 +17,10 @@ Dependencies:
 - express 🚀: The powerhouse web application framework that powers LightBnB.
 - nodemon 🔄: Fueling your development process with automatic server restarts, keeping you in the flow.
 
+Dev Dependencies:
+
+- jsdoc 📚: A powerful documentation generator to generate comprehensive API documentation.
+
 ## Getting Started
 1. Clone the repository.
 2. `npm install` to install the required dependencies.
