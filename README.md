@@ -21,8 +21,9 @@ Dependencies:
 1. Clone the repository.
 2. `npm install` to install the required dependencies.
 3. Set up the database:
-* Create a PostgreSQL database.
-* Configure the database connection in the project's configuration files.
+* create database lightbnb.
+* \c lightbnb
+* Configure the database connection in the project's configuration files `\i migrations/01_schema.sql`.(same for seeds)
 4. `npm run local` to start the server.
 5. Open your web browser and access LightBnB at `http://localhost:3000`
 
@@ -40,6 +41,9 @@ Dependencies:
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+
+## Final Product
+![Image of the main page](/screenshots/Screenshot%20(208).png)
 
 ## Join the LightBnB Community 🤝
 We value your feedback! If you encounter any issues or have suggestions for improvement, please open an issue on the project repository.
