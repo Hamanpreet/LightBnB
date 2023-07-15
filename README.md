@@ -21,7 +21,7 @@ Dependencies:
 1. Clone the repository.
 2. `npm install` to install the required dependencies.
 3. Set up the database:
-* create database lightbnb.
+* `create database lightbnb`.
 * \c lightbnb
 * Configure the database connection in the project's configuration files `\i migrations/01_schema.sql`.(same for seeds)
 4. `npm run local` to start the server.
