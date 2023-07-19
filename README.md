@@ -16,6 +16,7 @@ Dependencies:
 - cookie-session 🍪: Secure session management with encrypted cookies.
 - express 🚀: The powerhouse web application framework that powers LightBnB.
 - nodemon 🔄: Fueling your development process with automatic server restarts, keeping you in the flow.
+- postgres 🐘: The open-source relational database system used by LightBnB for data storage and retrieval.
 
 Dev Dependencies:
 
