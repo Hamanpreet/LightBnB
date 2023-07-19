@@ -4,7 +4,7 @@ const pool = require('./index.js');
 /**
 * Get a single user from the database given their email.
 * @param {String} email The email of the user.
-* @return {Promise<Object[]>} A promise to the user.
+* @return {Promise<Object[]>} A promise to the user
 */
 const getUserWithEmail = function(email) {
   return pool
